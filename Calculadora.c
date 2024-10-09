@@ -58,9 +58,7 @@ int main() {
         printf("Deseja continuar? (s/n): ");
         scanf(" %c", &continuar);
     } while (continuar == 's');
-
+    
     return 0;
 }
 
-    
-}
