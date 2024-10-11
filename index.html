@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f3f4f6, #e2e8f0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #4a5568;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .calculator {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            color: #4a5568;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #edf2f7;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #63b3ed;
+            outline: none;
+        }
+        button {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #2b6cb0;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2d3748;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function calcular() {
+            const operador = document.getElementById("operador").value;
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+            let resultado;
+
+            if (operador === 'r') {
+                if (num1 < 0) {
+                    resultado = "Erro: Raiz quadrada de número negativo!";
+                } else {
+                    resultado = Math.sqrt(num1).toFixed(2);
+                }
+            } else {
+                if (isNaN(num1) || isNaN(num2)) {
+                    resultado = "Por favor, insira números válidos.";
+                } else {
+                    switch (operador) {
+                        case '+':
+                            resultado = (num1 + num2).toFixed(2);
+                            break;
+                        case '-':
+                            resultado = (num1 - num2).toFixed(2);
+                            break;
+                        case '*':
+                            resultado = (num1 * num2).toFixed(2);
+                            break;
+                        case '/':
+                            if (num2 !== 0) {
+                                resultado = (num1 / num2).toFixed(2);
+                            } else {
+                                resultado = "Erro: Divisão por zero!";
+                            }
+                            break;
+                        case '^':
+                            resultado = Math.pow(num1, num2).toFixed(2);
+                            break;
+                        default:
+                            resultado = "Operador inválido!";
+                    }
+                }
+            }
+
+            document.getElementById("resultado").innerText = "Resultado: " + resultado;
+        }
+    </script>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Calculadora</h1>
+        <label for="operador">Digite a operação (+, -, *, /, ^, r para raiz quadrada): </label>
+        <input type="text" id="operador" maxlength="1" required>
+        
+        <label for="num1">Digite o primeiro número: </label>
+        <input type="number" id="num1" required>
+        
+        <label for="num2">Digite o segundo número (opcional): </label>
+        <input type="number" id="num2">
+        
+        <button onclick="calcular()">Calcular</button>
+        <p id="resultado"></p>
+    </div>
+</body>
+</html>
